@@ -1,0 +1,70 @@
+ ☐ 📋 SETUP INICIAL
+    ☐ Instalar dependencias (framer-motion, clsx)
+    ☐ Crear estructura de carpetas simplificada
+
+  ☐ 🎨 REFACTORING A COMPONENTES
+    ☐ Extraer HeroSection como componente
+    ☐ Extraer ServicesSection como componente
+    ☐ Extraer ProductsSection como componente
+    ☐ Extraer TechnologiesSection como componente
+    ☐ Extraer TeamSection como componente
+    ☐ Extraer ContactSection como componente
+
+  ☐ 🖥️ LAYOUT FULL-SCREEN
+    ☐ Implementar altura 100vh para cada sección
+    ☐ Implementar scroll snap entre secciones
+    ☐ Crear navegación con dots laterales
+
+  ☐ 🎬 ANIMACIONES Y UX
+    ☐ Implementar animaciones de entrada por scroll
+    ☐ Crear transiciones suaves entre secciones
+    ☐ Añadir micro-interactions
+
+  ☐ 🌙 DARK MODE
+    ☐ Crear ThemeProvider y hook personalizado
+    ☐ Implementar toggle de dark mode en header
+    ☐ Adaptar todos los componentes a dark/light
+
+  ☐ 🚀 POLISH FINAL
+    ☐ Testing responsive en todos los breakpoints
+    ☐ Optimizaciones de performance
+    ☐ Loading states
+
+● 🎯 ROADMAP COMPLETA - BINARY WEBSITE PREMIUM
+src/
+  ├── components/
+  │   ├── sections/        # Una carpeta simple para secciones
+  │   │   ├── HeroSection.tsx
+  │   │   ├── ServicesSection.tsx
+  │   │   ├── ProductsSection.tsx
+  │   │   ├── TechnologiesSection.tsx
+  │   │   ├── TeamSection.tsx
+  │   │   └── ContactSection.tsx
+  │   ├── ui/             # Los componentes UI que ya tienes
+  │   └── carrusel.tsx    # Tu carrusel
+  ├── contexts/
+  │   └── ThemeContext.tsx
+  └── hooks/
+      ├── useTheme.ts
+      └── useScrollAnimation.ts
+  🎬 Features Premium que vamos a agregar:
+
+  1. Full-Screen Sections: Cada sección ocupa 100vh
+  2. Scroll Snap: Navegación fluida entre secciones
+  3. Scroll Animations: Elementos aparecen al hacer scroll
+  4. Dark Mode: Toggle premium con transiciones suaves
+  5. Side Navigation: Dots laterales para navegación
+  6. Parallax Effects: Efectos sutiles de profundidad
+  7. Micro-interactions: Hover states y transiciones
+
+  📦 Dependencias que necesitamos instalar:
+
+  npm install framer-motion
+  npm install lucide-react (ya tienes)
+  npm install clsx
+
+  🚀 Plan de acción:
+
+  FASE 1: Refactoring a componentes (2-3 horas)
+  FASE 2: Implementar full-screen + animaciones (2 horas)FASE 3: Dark mode system (1 hora)
+  FASE 4: Polish y testing (1 hora)
