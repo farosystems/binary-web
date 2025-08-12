@@ -3,50 +3,71 @@
 import { cn } from "@/src/lib/utils"
 import { STYLES } from "@/src/lib/styles"
 import { BRANDING } from "@/src/lib/branding"
+import { motion } from "framer-motion"
 
 export default function TeamSection() {
   return (
     <section 
       id="equipo" 
       className={cn(
-        STYLES.layout.sectionLarge,
-        "bg-dynamic-muted relative overflow-hidden"
+        STYLES.layout.sectionFullScreen,
+        "bg-dynamic-primary"
       )}
     >
-      {/* Patrón de fondo decorativo dinámico */}
-      <div className="absolute inset-0 opacity-5">
-        <div 
-          className="absolute inset-0" 
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, var(--text-primary) 2px, transparent 2px), radial-gradient(circle at 75% 75%, var(--text-primary) 1px, transparent 1px)`,        
-            backgroundSize: '60px 60px, 40px 40px'
-          }}
-        />
-      </div>
 
       {/* Contenedor principal */}
-      <div className={cn(STYLES.layout.container, "relative z-10")}>
-        {/* Header de la sección - DINÁMICO */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-dynamic-primary">
+      <div className={STYLES.layout.container}>
+        {/* Header de la sección con animaciones */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold mb-6 text-dynamic-primary"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             Nuestro Equipo
-          </h2>
-          <p className="text-lg md:text-xl text-dynamic-secondary max-w-3xl mx-auto leading-relaxed">
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-dynamic-secondary max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
             Líderes con más de 30 años de experiencia transformando empresas a través de la tecnología
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Team Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
 
           {/* Roberto Schettini */}
-          <div className="group relative">
-            <div className="bg-dynamic-secondary border border-dynamic backdrop-blur-sm rounded-2xl p-6 md:p-8 hover:border-dynamic-soft transition-all duration-500 hover:transform hover:-translate-y-2 shadow-lg hover:shadow-xl">
+          <motion.div 
+            className="group relative"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-dynamic-secondary border border-dynamic backdrop-blur-sm rounded-2xl p-6 md:p-8 hover:border-dynamic-soft transition-all duration-500 hover:transform hover:-translate-y-2 shadow-lg hover:shadow-xl h-full flex flex-col">
               {/* Photo Section */}
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
                 <div className="relative shrink-0">
-                  <div className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center shadow-2xl group-hover:scale-105 transition-transform duration-300">
-                    <div className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gradient-to-br from-gray-600 to-gray-800 shadow-2xl group-hover:scale-105 transition-transform duration-300">
+                  <div className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center shadow-2xl">
+                    <div className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gradient-to-br from-gray-600 to-gray-800 shadow-2xl">
                       <img 
                         src="/funders/RS.jpg" 
                         alt="Roberto Schettini" 
@@ -71,7 +92,7 @@ export default function TeamSection() {
               </div>
 
               {/* Experience Details */}
-              <div className="space-y-4">
+              <div className="space-y-4 flex-1">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 shrink-0"></div>
                   <p className="text-dynamic-secondary text-sm leading-relaxed">
@@ -92,16 +113,22 @@ export default function TeamSection() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Jorge Boccanera */}
-          <div className="group relative">
-            <div className="bg-dynamic-secondary border border-dynamic backdrop-blur-sm rounded-2xl p-6 md:p-8 hover:border-dynamic-soft transition-all duration-500 hover:transform hover:-translate-y-2 shadow-lg hover:shadow-xl">
+          <motion.div 
+            className="group relative"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-dynamic-secondary border border-dynamic backdrop-blur-sm rounded-2xl p-6 md:p-8 hover:border-dynamic-soft transition-all duration-500 hover:transform hover:-translate-y-2 shadow-lg hover:shadow-xl h-full flex flex-col">
               {/* Photo Section */}
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
                 <div className="relative shrink-0">
-                  <div className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center shadow-2xl group-hover:scale-105 transition-transform duration-300">
-                    <div className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gradient-to-br from-gray-600 to-gray-800 shadow-2xl group-hover:scale-105 transition-transform duration-300">
+                  <div className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center shadow-2xl">
+                    <div className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gradient-to-br from-gray-600 to-gray-800 shadow-2xl">
                       <img 
                         src="/funders/JB.jpeg" 
                         alt="Jorge A. Boccanera" 
@@ -126,7 +153,7 @@ export default function TeamSection() {
               </div>
 
               {/* Experience Details */}
-              <div className="space-y-4">
+              <div className="space-y-4 flex-1">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-green-400 rounded-full mt-2 shrink-0"></div>
                   <p className="text-dynamic-secondary text-sm leading-relaxed">
@@ -147,28 +174,58 @@ export default function TeamSection() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
       {/* Bottom Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
-        <div className="text-center">
+      <motion.div 
+        className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        viewport={{ once: true, margin: "-50px" }}
+      >
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          viewport={{ once: true }}
+        >
           <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">65+</div>
           <div className="text-dynamic-secondary text-sm">Años de experiencia combinada</div>
-        </div>
-        <div className="text-center">
+        </motion.div>
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+          viewport={{ once: true }}
+        >
           <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">50+</div>
           <div className="text-dynamic-secondary text-sm">Proyectos exitosos</div>
-        </div>
-        <div className="text-center">
+        </motion.div>
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 1.0 }}
+          viewport={{ once: true }}
+        >
           <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">3</div>
           <div className="text-dynamic-secondary text-sm">Países de operación</div>
-        </div>
-        <div className="text-center">
+        </motion.div>
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          viewport={{ once: true }}
+        >
           <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">100%</div>
           <div className="text-dynamic-secondary text-sm">Compromiso con la excelencia</div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   </section>
   )

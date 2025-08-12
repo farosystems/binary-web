@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/src/components/ui/card"
 import { cn } from "@/src/lib/utils"
 import { STYLES } from "@/src/lib/styles"
 import { BRANDING } from "@/src/lib/branding"
-import ClientCarousel from "@/src/components/carrusel"
 import Header from "@/src/components/Header"
 import ScrollToTop from "@/src/components/ScrollToTop"
 
@@ -15,8 +14,10 @@ import HeroSection from "@/src/components/sections/HeroSection"
 import ServicesSection from "@/src/components/sections/ServicesSection"
 import ProductsSection from "@/src/components/sections/ProductsSection"
 import TechnologiesSection from "@/src/components/sections/TechnologiesSection"
+import SuccessStoriesSection from "@/src/components/sections/SuccessStoriesSection"
 import TeamSection from "@/src/components/sections/TeamSection"
 import ContactSection from "@/src/components/sections/ContactSection"
+import FooterSection from "@/src/components/sections/FooterSection"
 
 export default function BinaryLandingPage() {
   const [activeSection, setActiveSection] = useState("")
@@ -121,35 +122,8 @@ export default function BinaryLandingPage() {
       {/* Technologies Section */}
       <TechnologiesSection />
 
-      {/* Casos de Éxito Argentina */}
-        <section 
-          id="casos-exito-argentina" 
-          className={cn(
-            STYLES.layout.sectionFullScreen,
-            "bg-dynamic-secondary"
-          )}
-        >
-          <div className={STYLES.layout.container}>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-4">
-                Casos de Éxito - Argentina
-              </h2>
-              <p className="text-xl text-dynamic-secondary">
-                Nuestros clientes de confianza en el mercado argentino
-              </p>
-            </div>
-
-            <ClientCarousel />
-
-            <div className="text-center mt-8">
-              <p className="max-w-3xl mx-auto leading-relaxed text-dynamic-secondary">
-                Trabajamos con empresas líderes en diversos sectores: energía, salud, servicios públicos,
-                industria y defensa. Cada proyecto representa nuestro compromiso con la excelencia tecnológica
-                y la innovación adaptada a las necesidades específicas del mercado argentino.
-              </p>
-            </div>
-          </div>
-        </section>
+      {/* Success Stories Section */}
+      <SuccessStoriesSection />
 
       {/* Team Section */}
       <TeamSection />
@@ -157,19 +131,11 @@ export default function BinaryLandingPage() {
       {/* Contact Section */}
       <ContactSection />
 
+      {/* Footer Section */}
+      <FooterSection />
+
       {/* Scroll to Top Button */}
       <ScrollToTop />
-
-      {/* Footer - DINÁMICO */}
-      <footer className="py-8 px-4 bg-dynamic-muted border-t border-dynamic">
-        <div className="container mx-auto text-center">
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <img src="/logos/binary-logo.svg" alt="Binary Logo" className="h-12 sm:h-16 md:h-20 w-auto" />
-            <span className="text-lg font-bold text-dynamic-primary">BINARY ARGENTINA</span>
-          </div>
-          <p className="text-dynamic-muted">© 2018, Binary Intelligent Solutions Argentina</p>
-        </div>
-      </footer>
     </div>
   )
 }

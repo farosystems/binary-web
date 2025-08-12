@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { cn } from "@/src/lib/utils";
 
 const ClientCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -102,94 +104,127 @@ const ClientCarousel = () => {
 
   return (
     <div 
-      className="relative bg-gray-50 rounded-xl p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto"
+      className={cn(
+        "relative bg-transparent p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto"
+      )}
       onMouseEnter={() => setIsPlaying(false)}
       onMouseLeave={() => setIsPlaying(true)}
     >
       {/* Botón Anterior - Oculto en mobile */}
-      <button
+      <motion.button
         onClick={prevSlide}
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 hidden sm:block"
+        className={cn(
+          "absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3",
+          "bg-dynamic-secondary rounded-full shadow-lg hover:shadow-xl",
+          "hover:bg-dynamic-primary transition-all duration-300 hidden sm:block"
+        )}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
       >
-        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
-      </button>
+        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-dynamic-primary" />
+      </motion.button>
 
       {/* Container de Logos */}
       <div className="overflow-hidden px-2 sm:mx-8 lg:mx-16">
-        <div 
+        <motion.div 
           className="flex transition-transform duration-700 ease-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          animate={{ x: `-${currentIndex * 100}%` }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
         >
           {Array.from({ length: totalSlides }, (_, slideIndex) => (
             <div key={slideIndex} className="flex gap-3 sm:gap-4 lg:gap-8 min-w-full justify-center">
               {clients.slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide).map((client, index) => (
-                <div key={index} className="flex flex-col items-center group cursor-pointer">
+                <motion.div 
+                  key={index} 
+                  className="flex flex-col items-center group cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
                   {/* Logo - Mobile First sizing */}
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 border border-gray-200 p-2 sm:p-3">
-                    <img 
-                      src={client.logo} 
-                      alt={`${client.name} Logo`} 
-                      className="max-w-full max-h-full object-contain"
-                    />
-                  </div>
+                  <img 
+                    src={client.logo} 
+                    alt={`${client.name} Logo`} 
+                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain group-hover:scale-110 transition-transform duration-300"
+                  />
                   {/* Nombre - Mobile First text sizing */}
-                  <span className="text-gray-700 mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-center max-w-20 sm:max-w-24 lg:max-w-28 leading-tight">
+                  <span className="text-dynamic-primary mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-center max-w-20 sm:max-w-24 lg:max-w-28 leading-tight">
                     {client.name}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Botón Siguiente - Oculto en mobile */}
-      <button
+      <motion.button
         onClick={nextSlide}
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 hidden sm:block"
+        className={cn(
+          "absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3",
+          "bg-dynamic-secondary rounded-full shadow-lg hover:shadow-xl",
+          "hover:bg-dynamic-primary transition-all duration-300 hidden sm:block"
+        )}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
       >
-        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
-      </button>
+        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-dynamic-primary" />
+      </motion.button>
 
       {/* Indicadores */}
       <div className="flex justify-center mt-4 sm:mt-6 gap-2 sm:gap-2">
         {Array.from({ length: totalSlides }, (_, index) => (
-          <button
+          <motion.button
             key={index}
             onClick={() => goToSlide(index)}
             disabled={isNavigating}
-            className={`rounded-full transition-all duration-300 touch-manipulation ${
+            className={cn(
+              "rounded-full transition-all duration-300 touch-manipulation",
               index === currentIndex
-                ? 'h-2 w-6 sm:h-2 sm:w-8 bg-gray-700'
-                : 'h-2 w-2 sm:h-2 sm:w-2 bg-gray-400 hover:bg-gray-600'
-            } ${isNavigating ? 'pointer-events-none' : ''}`}
-            style={{ minHeight: '12px', minWidth: '12px' }} // Better touch target
+                ? 'h-2 w-6 sm:h-2 sm:w-8 bg-dynamic-primary'
+                : 'h-2 w-2 sm:h-2 sm:w-2 bg-dynamic-soft hover:bg-dynamic-primary',
+              isNavigating ? 'pointer-events-none' : ''
+            )}
+            style={{ minHeight: '12px', minWidth: '12px' }}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
           />
         ))}
       </div>
 
       {/* Botones de navegación para mobile */}
       <div className="flex justify-center gap-4 mt-4 sm:hidden">
-        <button
+        <motion.button
           onClick={prevSlide}
           disabled={isNavigating}
-          className={`p-3 bg-white rounded-full shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 touch-manipulation ${
+          className={cn(
+            "p-3 bg-dynamic-secondary rounded-full shadow-lg hover:shadow-xl",
+            "hover:bg-dynamic-primary transition-all duration-300 touch-manipulation",
             isNavigating ? 'opacity-50 pointer-events-none' : ''
-          }`}
-          style={{ minHeight: '44px', minWidth: '44px' }} // Better touch target
+          )}
+          style={{ minHeight: '44px', minWidth: '44px' }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <ChevronLeft className="w-4 h-4 text-gray-700" />
-        </button>
-        <button
+          <ChevronLeft className="w-4 h-4 text-dynamic-primary" />
+        </motion.button>
+        <motion.button
           onClick={nextSlide}
           disabled={isNavigating}
-          className={`p-3 bg-white rounded-full shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 touch-manipulation ${
+          className={cn(
+            "p-3 bg-dynamic-secondary rounded-full shadow-lg hover:shadow-xl",
+            "hover:bg-dynamic-primary transition-all duration-300 touch-manipulation",
             isNavigating ? 'opacity-50 pointer-events-none' : ''
-          }`}
-          style={{ minHeight: '44px', minWidth: '44px' }} // Better touch target
+          )}
+          style={{ minHeight: '44px', minWidth: '44px' }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <ChevronRight className="w-4 h-4 text-gray-700" />
-        </button>
+          <ChevronRight className="w-4 h-4 text-dynamic-primary" />
+        </motion.button>
        </div>
       </div>
     );
