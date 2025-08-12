@@ -8,6 +8,7 @@ import { cn } from "@/src/lib/utils"
 import { STYLES } from "@/src/lib/styles"
 import { BRANDING } from "@/src/lib/branding"
 import { motion } from "framer-motion"
+import { textReveal, fadeInUp, staggerContainer, staggerItem, getViewport } from "@/src/lib/animations"
 
 // 📦 DATOS DE PRODUCTOS - Parametrizados para fácil modificación
 const products = [
@@ -165,32 +166,66 @@ export default function ProductsSection() {
     <section 
       id="productos" 
       className={cn(
-        STYLES.layout.sectionLarge
+        STYLES.layout.sectionFullScreen
       )}
     >
       {/* Contenedor principal */}
       <div className={STYLES.layout.container}>
-        {/* Título de la sección */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-4">
+        {/* Título de la sección - MEJORADO */}
+        <motion.div 
+          className="text-center mb-12"
+          {...fadeInUp}
+          whileInView={fadeInUp.animate}
+          viewport={getViewport()}
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-4"
+            {...textReveal}
+            whileInView={textReveal.animate}
+            viewport={getViewport()}
+            transition={{ ...textReveal.transition, delay: 0.2 }}
+          >
             Suite de productos
-          </h2>
-          <p className="text-dynamic-secondary mb-2">
+          </motion.h2>
+          <motion.p 
+            className="text-dynamic-secondary mb-2"
+            {...fadeInUp}
+            whileInView={fadeInUp.animate}
+            viewport={getViewport()}
+            transition={{ ...fadeInUp.transition, delay: 0.4 }}
+          >
             Soluciones tecnológicas especializadas para tu empresa
-          </p>
-          <p className="text-sm text-dynamic-secondary/70">
+          </motion.p>
+          <motion.p 
+            className="text-sm text-dynamic-secondary/70"
+            {...fadeInUp}
+            whileInView={fadeInUp.animate}
+            viewport={getViewport()}
+            transition={{ ...fadeInUp.transition, delay: 0.6 }}
+          >
             {/* Instrucción responsive */}
             <span className="hidden md:inline">Pasa el mouse sobre las cards para ver los detalles</span>
             <span className="md:hidden">Toca "Ver detalles" para más información</span>
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        {/* Grid de productos */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Grid de productos - MEJORADO */}
+        <motion.div 
+          className={cn(STYLES.layout.gridServices, "lg:grid-cols-3")}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={getViewport()}
+        >
           {products.map((product, index) => (
-            <FlipCard key={index} product={product} index={index} />
+            <motion.div
+              key={index}
+              variants={staggerItem}
+            >
+              <FlipCard product={product} index={index} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <style jsx global>{`

@@ -6,6 +6,7 @@ import { cn } from "@/src/lib/utils"
 import { STYLES } from "@/src/lib/styles"
 import { BRANDING } from "@/src/lib/branding"
 import { motion } from "framer-motion"
+import { textReveal, fadeInUp, staggerContainer, staggerItem, cardReveal, getViewport } from "@/src/lib/animations"
 
 // 📋 DATOS DE SERVICIOS - Parametrizados para fácil modificación
 const services = [
@@ -50,58 +51,38 @@ export default function ServicesSection() {
 
       {/* Contenedor principal */}
       <div className={cn(STYLES.layout.container, "relative z-10")}>
-        {/* Título de la sección - ANIMADO */}
+        {/* Título de la sección - MEJORADO */}
         <motion.div 
           className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          {...fadeInUp}
+          whileInView={fadeInUp.animate}
+          viewport={{ once: true }}
         >
           <motion.h2 
             className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            {...textReveal}
+            whileInView={textReveal.animate}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ ...textReveal.transition, delay: 0.2 }}
           >
             Nos especializamos en:
           </motion.h2>
         </motion.div>
 
-        {/* Grid de servicios - ANIMADO con stagger */}
+        {/* Grid de servicios - MEJORADO */}
         <motion.div 
           className={STYLES.layout.gridServices}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.15
-              }
-            }
-          }}
+          viewport={{ once: true }}
         >
           {services.map((service, index) => {
             const IconComponent = service.icon
             return (
               <motion.div
                 key={index}
-                variants={{
-                  hidden: { opacity: 0, y: 40, scale: 0.9 },
-                  visible: { 
-                    opacity: 1, 
-                    y: 0, 
-                    scale: 1,
-                    transition: {
-                      type: "spring",
-                      stiffness: 100,
-                      damping: 15
-                    }
-                  }
-                }}
+                variants={cardReveal}
                 whileHover={{ 
                   y: -8, 
                   scale: 1.02,
@@ -138,6 +119,7 @@ export default function ServicesSection() {
                         className="text-lg font-semibold mb-3 text-dynamic-secondary"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
                         transition={{ delay: 0.3 }}
                       >
                         {service.subtitle}
@@ -149,6 +131,7 @@ export default function ServicesSection() {
                       className="text-dynamic-secondary mb-4 leading-relaxed flex-1"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
                       transition={{ delay: 0.4 }}
                     >
                       {service.description}

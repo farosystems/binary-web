@@ -6,6 +6,7 @@ import { cn } from "@/src/lib/utils"
 import { STYLES, getButtonStyles } from "@/src/lib/styles"
 import { BRANDING } from "@/src/lib/branding"
 import { motion } from "framer-motion"
+import { heroTitle, fadeInUp, staggerContainer, staggerItem, getViewport } from "@/src/lib/animations"
 
 interface HeroSectionProps {
   onSmoothScroll: (targetId: string) => void
@@ -37,12 +38,10 @@ export default function HeroSection({ onSmoothScroll }: HeroSectionProps) {
             +30 años transformando empresas
           </motion.div>
 
-          {/* Título principal con animación escalonada */}
+          {/* Título principal con animación mejorada */}
           <motion.h1 
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white leading-tight"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            {...heroTitle}
           >
             Innovamos y transformamos tu negocio con{" "}
             <motion.span 
@@ -55,25 +54,25 @@ export default function HeroSection({ onSmoothScroll }: HeroSectionProps) {
             </motion.span>
           </motion.h1>
 
-          {/* Subtítulo con entrada suave */}
+          {/* Subtítulo con entrada mejorada */}
           <motion.p 
             className="text-lg sm:text-xl md:text-2xl mb-8 text-white opacity-90 leading-relaxed max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            {...fadeInUp}
+            transition={{ ...fadeInUp.transition, delay: 0.5 }}
           >
             Soluciones ecológicas, inteligentes y ahorrativas para empresas locales y globales
           </motion.p>
 
-          {/* Botones con animaciones premium */}
+          {/* Botones con animaciones mejoradas */}
           <motion.div 
             className="flex flex-col sm:flex-row gap-4 justify-center px-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
           >
             {/* Botón primario */}
             <motion.div
+              variants={staggerItem}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -97,6 +96,7 @@ export default function HeroSection({ onSmoothScroll }: HeroSectionProps) {
 
             {/* Botón secundario */}
             <motion.div
+              variants={staggerItem}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}

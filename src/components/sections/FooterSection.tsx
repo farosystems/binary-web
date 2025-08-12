@@ -4,6 +4,7 @@ import { cn } from "@/src/lib/utils"
 import { STYLES } from "@/src/lib/styles"
 import { motion } from "framer-motion"
 import { Mail, MapPin, Globe, ExternalLink, Heart } from "lucide-react"
+import { fadeInUp, staggerContainer, staggerItem, scaleIn, getViewport } from "@/src/lib/animations"
 
 export default function FooterSection() {
   const locations = [
@@ -49,17 +50,21 @@ export default function FooterSection() {
   return (
     <footer className={cn("bg-dynamic-primary border-t border-dynamic", "relative")}>
       <div className={cn(STYLES.layout.container, "py-12")}>
+        <div className="max-w-6xl mx-auto">
         
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={getViewport()}
+        >
           
           {/* Company Info */}
           <motion.div 
             className="lg:col-span-1"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
           >
             <div className="mb-4">
               <div className="text-dynamic-primary text-lg font-bold leading-tight">
@@ -80,10 +85,7 @@ export default function FooterSection() {
 
           {/* Quick Links */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
           >
             <h4 className="text-lg font-semibold text-dynamic-primary mb-4">Navegación</h4>
             <ul className="space-y-2">
@@ -103,10 +105,7 @@ export default function FooterSection() {
           {/* Locations */}
           <motion.div 
             className="lg:col-span-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            variants={staggerItem}
           >
             <h4 className="text-lg font-semibold text-dynamic-primary mb-4">Nuestras Oficinas</h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -114,10 +113,8 @@ export default function FooterSection() {
                 <motion.div 
                   key={index}
                   className="bg-dynamic-secondary rounded-lg p-4 border border-dynamic"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  viewport={{ once: true }}
+                  variants={scaleIn}
+                  transition={{ delay: index * 0.1 }}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-lg">{location.flag}</span>
@@ -140,7 +137,7 @@ export default function FooterSection() {
               ))}
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Bottom Bar */}
         <motion.div 
@@ -233,6 +230,7 @@ export default function FooterSection() {
             </p>
           </motion.div>
         </motion.div>
+        </div>
       </div>
     </footer>
   )

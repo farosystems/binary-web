@@ -8,6 +8,8 @@ import { STYLES } from "@/src/lib/styles"
 import { BRANDING } from "@/src/lib/branding"
 import Header from "@/src/components/Header"
 import ScrollToTop from "@/src/components/ScrollToTop"
+import { motion } from "framer-motion"
+import { textReveal, fadeInUp, staggerContainer, staggerItem, getViewport } from "@/src/lib/animations"
 
 // Import all section components
 import HeroSection from "@/src/components/sections/HeroSection"
@@ -74,10 +76,7 @@ export default function BinaryLandingPage() {
       {/* Services Section */}
       <ServicesSection />
 
-      {/* Products Section */}
-      <ProductsSection />
-
-      {/* International Activity Section */}
+      {/* International Activity Section - MEJORADO */}
         <section 
           id="actividad" 
           className={cn(
@@ -86,38 +85,61 @@ export default function BinaryLandingPage() {
           )}
         >
           <div className={STYLES.layout.container}>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-dynamic-primary">
+            <motion.div 
+              className="text-center mb-12"
+              {...fadeInUp}
+              whileInView={fadeInUp.animate}
+              viewport={getViewport()}
+            >
+              <motion.h2 
+                className="text-3xl md:text-4xl font-bold mb-4 text-dynamic-primary"
+                {...textReveal}
+                whileInView={textReveal.animate}
+                viewport={getViewport()}
+                transition={{ ...textReveal.transition, delay: 0.2 }}
+              >
                 Binary: Actividad internacional
-              </h2>
-              <p className="text-xl text-dynamic-secondary">
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-dynamic-secondary"
+                {...fadeInUp}
+                whileInView={fadeInUp.animate}
+                viewport={getViewport()}
+                transition={{ ...fadeInUp.transition, delay: 0.4 }}
+              >
                 Soluciones ecológicas, inteligentes y ahorrativas
-              </p>
-            </div>
-            <div className={cn(
-              "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-            )}>
+              </motion.p>
+            </motion.div>
+            <motion.div 
+              className={cn(STYLES.layout.gridServices, "lg:grid-cols-3")}
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={getViewport()}
+            >
               {benefits.map((benefit, index) => (
-                <Card
-                  key={index}
-                  className="text-center group transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-lg bg-dynamic-secondary border-dynamic hover:shadow-xl"
-                >
-                  <CardContent className="p-8">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      {benefit.icon}
-                    </div>
-                    <h3 className="text-xl font-bold mb-4 text-dynamic-primary">
-                      {benefit.title}
-                    </h3>
-                    <p className="leading-relaxed text-dynamic-secondary">
-                      {benefit.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <motion.div key={index} variants={staggerItem} className="h-full">
+                  <Card className="text-center group transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-lg bg-dynamic-secondary border-dynamic hover:shadow-xl h-full">
+                    <CardContent className="p-8 h-full flex flex-col">
+                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        {benefit.icon}
+                      </div>
+                      <h3 className="text-xl font-bold mb-4 text-dynamic-primary">
+                        {benefit.title}
+                      </h3>
+                      <p className="leading-relaxed text-dynamic-secondary flex-1">
+                        {benefit.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
+
+      {/* Products Section */}
+      <ProductsSection />
 
       {/* Technologies Section */}
       <TechnologiesSection />

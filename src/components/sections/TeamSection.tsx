@@ -4,6 +4,7 @@ import { cn } from "@/src/lib/utils"
 import { STYLES } from "@/src/lib/styles"
 import { BRANDING } from "@/src/lib/branding"
 import { motion } from "framer-motion"
+import { textReveal, fadeInUp, staggerContainer, staggerItem, cardReveal, scaleIn, getViewport } from "@/src/lib/animations"
 
 export default function TeamSection() {
   return (
@@ -17,50 +18,46 @@ export default function TeamSection() {
 
       {/* Contenedor principal */}
       <div className={STYLES.layout.container}>
-        {/* Header de la sección con animaciones */}
+        {/* Header de la sección - MEJORADO */}
         <motion.div 
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-100px" }}
+          {...fadeInUp}
+          whileInView={fadeInUp.animate}
+          viewport={getViewport()}
         >
           <motion.h2 
             className="text-3xl md:text-4xl font-bold mb-6 text-dynamic-primary"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            {...textReveal}
+            whileInView={textReveal.animate}
+            viewport={getViewport()}
+            transition={{ ...textReveal.transition, delay: 0.2 }}
           >
             Nuestro Equipo
           </motion.h2>
           <motion.p 
             className="text-xl text-dynamic-secondary max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
+            {...fadeInUp}
+            whileInView={fadeInUp.animate}
+            viewport={getViewport()}
+            transition={{ ...fadeInUp.transition, delay: 0.4 }}
           >
             Líderes con más de 30 años de experiencia transformando empresas a través de la tecnología
           </motion.p>
         </motion.div>
 
-        {/* Team Cards */}
+        {/* Team Cards - MEJORADO */}
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={getViewport()}
         >
 
           {/* Roberto Schettini */}
           <motion.div 
             className="group relative"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            viewport={{ once: true }}
+            variants={cardReveal}
           >
             <div className="bg-dynamic-secondary border border-dynamic backdrop-blur-sm rounded-2xl p-6 md:p-8 hover:border-dynamic-soft transition-all duration-500 hover:transform hover:-translate-y-2 shadow-lg hover:shadow-xl h-full flex flex-col">
               {/* Photo Section */}
@@ -118,10 +115,7 @@ export default function TeamSection() {
           {/* Jorge Boccanera */}
           <motion.div 
             className="group relative"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            viewport={{ once: true }}
+            variants={cardReveal}
           >
             <div className="bg-dynamic-secondary border border-dynamic backdrop-blur-sm rounded-2xl p-6 md:p-8 hover:border-dynamic-soft transition-all duration-500 hover:transform hover:-translate-y-2 shadow-lg hover:shadow-xl h-full flex flex-col">
               {/* Photo Section */}
@@ -177,50 +171,38 @@ export default function TeamSection() {
           </motion.div>
         </motion.div>
 
-      {/* Bottom Stats */}
+      {/* Bottom Stats - MEJORADO */}
       <motion.div 
         className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        viewport={{ once: true, margin: "-50px" }}
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={getViewport()}
       >
         <motion.div 
           className="text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          viewport={{ once: true }}
+          variants={scaleIn}
         >
           <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">65+</div>
           <div className="text-dynamic-secondary text-sm">Años de experiencia combinada</div>
         </motion.div>
         <motion.div 
           className="text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.9 }}
-          viewport={{ once: true }}
+          variants={scaleIn}
         >
           <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">50+</div>
           <div className="text-dynamic-secondary text-sm">Proyectos exitosos</div>
         </motion.div>
         <motion.div 
           className="text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 1.0 }}
-          viewport={{ once: true }}
+          variants={scaleIn}
         >
           <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">3</div>
           <div className="text-dynamic-secondary text-sm">Países de operación</div>
         </motion.div>
         <motion.div 
           className="text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 1.1 }}
-          viewport={{ once: true }}
+          variants={scaleIn}
         >
           <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">100%</div>
           <div className="text-dynamic-secondary text-sm">Compromiso con la excelencia</div>

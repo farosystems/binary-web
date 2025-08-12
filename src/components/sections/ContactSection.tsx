@@ -5,6 +5,7 @@ import { STYLES } from "@/src/lib/styles"
 import { BRANDING } from "@/src/lib/branding"
 import { motion } from "framer-motion"
 import { Mail, MapPin, Phone, Send } from "lucide-react"
+import { textReveal, fadeInUp, fadeInLeft, fadeInRight, getViewport } from "@/src/lib/animations"
 
 export default function ContactSection() {
 
@@ -18,51 +19,50 @@ export default function ContactSection() {
     >
       {/* Contenedor principal */}
       <div className={STYLES.layout.container}>
-        {/* Header con animaciones */}
+        {/* Header con animaciones mejoradas */}
         <motion.div 
           className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-100px" }}
+          {...fadeInUp}
+          whileInView={fadeInUp.animate}
+          viewport={getViewport()}
         >
           <motion.h2 
             className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            {...textReveal}
+            whileInView={textReveal.animate}
+            viewport={getViewport()}
+            transition={{ ...textReveal.transition, delay: 0.2 }}
           >
             Contáctanos
           </motion.h2>
           <motion.p 
             className="text-xl text-dynamic-secondary"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
+            {...fadeInUp}
+            whileInView={fadeInUp.animate}
+            viewport={getViewport()}
+            transition={{ ...fadeInUp.transition, delay: 0.4 }}
           >
             Estamos aquí para ayudarte a transformar tu empresa
           </motion.p>
         </motion.div>
 
-        {/* Información de contacto */}
+        {/* Información de contacto mejorada */}
         <motion.div 
           className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          viewport={{ once: true, margin: "-100px" }}
+          {...fadeInUp}
+          whileInView={fadeInUp.animate}
+          viewport={getViewport()}
+          transition={{ ...fadeInUp.transition, delay: 0.3 }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             
             {/* Información principal */}
             <motion.div 
               className="space-y-6"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              viewport={{ once: true }}
+              {...fadeInLeft}
+              whileInView={fadeInLeft.animate}
+              viewport={getViewport()}
+              transition={{ ...fadeInLeft.transition, delay: 0.5 }}
             >
               <h3 className="text-xl font-bold text-dynamic-primary mb-4">
                 Información de contacto
@@ -107,10 +107,10 @@ export default function ContactSection() {
             {/* Formulario de contacto */}
             <motion.div
               className="bg-dynamic-secondary rounded-xl p-6 border border-dynamic"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              viewport={{ once: true }}
+              {...fadeInRight}
+              whileInView={fadeInRight.animate}
+              viewport={getViewport()}
+              transition={{ ...fadeInRight.transition, delay: 0.7 }}
             >
               <h3 className="text-xl font-bold text-dynamic-primary mb-6">
                 Envíanos un mensaje
