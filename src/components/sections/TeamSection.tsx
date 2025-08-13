@@ -99,13 +99,19 @@ export default function TeamSection() {
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 shrink-0"></div>
                   <p className="text-dynamic-secondary text-sm leading-relaxed">
-                    <strong className="text-dynamic-primary">Especialización:</strong> Salud, Energía, Producción, Servicios Masivos, Integración de Negocios
+                    <strong className="text-dynamic-primary">Especialización:</strong> Salud, Energía, Producción, Servicios Masivos, Integración de Negocios, Contactos internacionales y Organización de equipos de proyecto
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 shrink-0"></div>
                   <p className="text-dynamic-secondary text-sm leading-relaxed">
-                    <strong className="text-dynamic-primary">Experiencia destacada:</strong> Gerente de Sistemas, Presidente de Correo Privado, Gerente de Operaciones en Hospital Británico, Fleni, Sanatorio Finochietto e Instituto Fleming
+                    <strong className="text-dynamic-primary">Experiencia destacada:</strong> Gerente de Sistemas, Presidente de Correo Privado, Gerente de Operaciones en 4 entidades de Salud de primer nivel: Hospital Británico, Fleni, Sanatorio Finochietto e Instituto Fleming
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 shrink-0"></div>
+                  <p className="text-dynamic-secondary text-sm leading-relaxed">
+                    <strong className="text-dynamic-primary">Experiencia sectorial:</strong> Sector Privado y Administración Pública de Argentina. Socio Fundador de Binary USA y Binary Argentina
                   </p>
                 </div>
               </div>
@@ -157,13 +163,25 @@ export default function TeamSection() {
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-green-400 rounded-full mt-2 shrink-0"></div>
                   <p className="text-dynamic-secondary text-sm leading-relaxed">
-                    <strong className="text-dynamic-primary">Organismos Internacionales:</strong> Consultor contratado por BM, PNUD y BID
+                    <strong className="text-dynamic-primary">Especialización:</strong> Consultoría de planeamiento, diseño e implementación de gestión informática y operativa, proyectos de soluciones informáticas y de gestión, conducción de proyectos
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-green-400 rounded-full mt-2 shrink-0"></div>
                   <p className="text-dynamic-secondary text-sm leading-relaxed">
-                    <strong className="text-dynamic-primary">Trayectoria:</strong> Socio de ITG Consultores, THS, ISP y Binary. Especialista en Salud, Utilities, Energía y Producción
+                    <strong className="text-dynamic-primary">Organismos Internacionales:</strong> Consultor contratado por BM (Banco Mundial), PNUD (Programa de las Naciones Unidas para el Desarrollo) y BID (Banco Interamericano de Desarrollo)
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-green-400 rounded-full mt-2 shrink-0"></div>
+                  <p className="text-dynamic-secondary text-sm leading-relaxed">
+                    <strong className="text-dynamic-primary">Trayectoria:</strong> Consultor y socio de ITG Consultores, THS, ISP y Binary. Rubros: Salud, Utilities, Energía, Producción y Servicios
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-green-400 rounded-full mt-2 shrink-0"></div>
+                  <p className="text-dynamic-secondary text-sm leading-relaxed">
+                    <strong className="text-dynamic-primary">Experiencia sectorial:</strong> Sector Privado y Administración Pública de Argentina. Socio de Binary USA y Binary Argentina
                   </p>
                 </div>
               </div>

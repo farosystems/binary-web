@@ -143,12 +143,20 @@ const ClientCarousel = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
                 >
-                  {/* Logo - Mobile First sizing */}
-                  <img 
-                    src={client.logo} 
-                    alt={`${client.name} Logo`} 
-                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain group-hover:scale-110 transition-transform duration-300"
-                  />
+                  {/* Logo - Tamaño uniforme */}
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 flex items-center justify-center">
+                    <img 
+                      src={client.logo} 
+                      alt={`${client.name} Logo`} 
+                      className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                      style={{ 
+                        width: 'auto', 
+                        height: 'auto',
+                        maxWidth: '100%',
+                        maxHeight: '100%'
+                      }}
+                    />
+                  </div>
                   {/* Nombre - Mobile First text sizing */}
                   <span className="text-dynamic-primary mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-center max-w-20 sm:max-w-24 lg:max-w-28 leading-tight">
                     {client.name}
