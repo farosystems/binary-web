@@ -1,13 +1,76 @@
 "use client"
 
 import { useState } from "react"
-import { Globe, Building, Shield, Calculator } from "lucide-react"
+import { Globe, Building, Shield, Calculator, Users, Heart, Zap, Server } from "lucide-react"
 import { Card, CardContent } from "@/src/components/ui/card"
 import { cn } from "@/src/lib/utils"
 import { STYLES } from "@/src/lib/styles"
 import { motion } from "framer-motion"
-import ClientCarousel from "@/src/components/carrusel"
 import { textReveal, fadeInUp, scaleIn, staggerContainer, staggerItem, getViewport } from "@/src/lib/animations"
+
+const argentinaCases = [
+  {
+    company: "Grupo SOLNIK",
+    location: "Buenos Aires, Argentina",
+    logo: "/clientes/solnik.svg",
+    project: "PM y QA en Implementación ERP Itris + Desarrollo e Implementación BI",
+    description: "Project Management y Quality Assurance en la implementación del ERP Itris, complementado con el desarrollo e implementación de Business Intelligence para optimizar la gestión empresarial del grupo.",
+    icon: Server,
+    country: "🇦🇷"
+  },
+  {
+    company: "Hospital Británico de Buenos Aires",
+    location: "Buenos Aires, Argentina",
+    logo: "/clientes/britanico.svg",
+    project: "Cambio de Modelo Operativo e Implementación SAP IS-H para el rubro salud",
+    description: "Transformación completa del modelo operativo e implementación de la solución SAP IS-H especializada para el sector salud, optimizando la gestión hospitalaria integral.",
+    icon: Heart,
+    country: "🇦🇷"
+  },
+  {
+    company: "Ministerio de Economía de la República Argentina",
+    location: "Buenos Aires, Argentina", 
+    logo: "/clientes/ministerio.png",
+    project: "Diseño, desarrollo e implementación del Sistema Integrado de Recursos Humanos - SIRHU en Oracle",
+    description: "Desarrollo completo del sistema SIRHU en plataforma Oracle para la gestión integral de recursos humanos del sector público nacional, incluyendo mejora continua.",
+    icon: Users,
+    country: "🇦🇷"
+  },
+  {
+    company: "ENARSA - Energía Argentina S.A.",
+    location: "Buenos Aires, Argentina",
+    logo: "/clientes/enarsa.png", 
+    project: "Definición del Plan de Sistemas y Departamento de Organización y Métodos",
+    description: "Definición integral del Plan de Sistemas, esquema de planificación y metodología de implementación, junto con la creación y estructuración del Departamento de Organización y Métodos.",
+    icon: Zap,
+    country: "🇦🇷"
+  },
+  {
+    company: "Hanseatica Compañía de Seguros",
+    location: "Buenos Aires, Argentina",
+    logo: "/clientes/Hanseatica.webp",
+    project: "Programa de fortalecimiento organizacional y tercerización IT",
+    description: "Diseño y liderazgo del programa de fortalecimiento incluyendo estrategia organizacional, modelo operativo y tercerización completa del gerenciamiento de tecnología e informática.",
+    icon: Building,
+    country: "🇦🇷"
+  },
+  {
+    company: "Diversos Clientes",
+    location: "Argentina",
+    logo: null,
+    project: "Desarrollo de soluciones Open Source basadas en la nube",
+    description: "Desarrollo y puesta en marcha de múltiples soluciones de negocios basadas en la nube y plataformas de código abierto, adaptadas a las necesidades específicas de cada cliente.",
+    icon: Shield,
+    country: "🇦🇷",
+    multipleClients: true,
+    clientLogos: [
+      "/clientes/edesur.png",
+      "/clientes/enel.png", 
+      "/clientes/fuerzaaerea.png"
+    ],
+    totalClients: 6
+  }
+]
 
 const internationalCases = [
   {
@@ -130,27 +193,112 @@ export default function SuccessStoriesSection() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <motion.div
-              {...scaleIn}
-              whileInView={scaleIn.animate}
+            <motion.div 
+              className={cn(STYLES.layout.gridServices, "lg:grid-cols-2 gap-8")}
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
               viewport={getViewport()}
-              transition={{ ...scaleIn.transition, delay: 0.3 }}
             >
-              <ClientCarousel />
+              {argentinaCases.map((case_item, index) => (
+                <motion.div key={index} variants={staggerItem} className="h-full">
+                  <Card className="group transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-lg bg-dynamic-secondary border-dynamic hover:shadow-xl h-full">
+                    <CardContent className="p-8 h-full flex flex-col">
+                      {/* Header with logo and country */}
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center">
+                          {case_item.logo && (
+                            <img 
+                              src={case_item.logo} 
+                              alt={case_item.company}
+                              className="h-12 w-12 object-contain mr-4"
+                            />
+                          )}
+                          <div>
+                            <h3 className="text-xl font-bold text-dynamic-primary">
+                              {case_item.company}
+                            </h3>
+                            <p className="text-sm text-dynamic-secondary">
+                              {case_item.location}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-2xl">
+                          {case_item.country}
+                        </div>
+                      </div>
+
+
+                      {/* Project Title */}
+                      <h4 className="text-lg font-semibold mb-3 text-dynamic-primary leading-tight">
+                        Proyecto: {case_item.project}
+                      </h4>
+
+                      {/* Description */}
+                      <p className="text-dynamic-secondary leading-relaxed flex-1">
+                        {case_item.description}
+                      </p>
+
+                      {/* Multiple Clients Bubbles */}
+                      {case_item.multipleClients && (
+                        <div className="mt-4 pt-3 border-t border-dynamic/30">
+                          <p className="text-xs text-dynamic-secondary mb-3 font-medium">
+                            👥 Clientes destacados:
+                          </p>
+                          <div className="flex items-center space-x-2">
+                            {case_item.clientLogos?.slice(0, 3).map((logoUrl, index) => (
+                              <div 
+                                key={index}
+                                className="w-8 h-8 rounded-full bg-gray-600 dark:bg-gray-600 shadow-md border border-gray-500 dark:border-gray-500 flex items-center justify-center overflow-hidden"
+                              >
+                                <img 
+                                  src={logoUrl} 
+                                  alt={`Cliente ${index + 1}`}
+                                  className="w-6 h-6 object-contain"
+                                />
+                              </div>
+                            ))}
+                            {case_item.totalClients && case_item.totalClients > 3 && (
+                              <div className="w-8 h-8 rounded-full bg-blue-500 text-white text-xs font-medium flex items-center justify-center shadow-md">
+                                +{case_item.totalClients - 3}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Footer with emphasis */}
+                      <div className="mt-6 pt-4 border-t border-dynamic">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                            Proyecto Nacional
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
             </motion.div>
 
             <motion.div 
-              className="text-center mt-8"
+              className="text-center mt-12 px-8 py-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl border border-blue-200 dark:border-blue-800"
               {...fadeInUp}
               whileInView={fadeInUp.animate}
               viewport={getViewport()}
               transition={{ ...fadeInUp.transition, delay: 0.6 }}
             >
-              <p className="max-w-3xl mx-auto leading-relaxed text-dynamic-secondary">
-                Trabajamos con empresas líderes en diversos sectores: energía, salud, servicios públicos,
-                industria y defensa. Cada proyecto representa nuestro compromiso con la excelencia tecnológica
-                y la innovación adaptada a las necesidades específicas del mercado argentino.
-              </p>
+              <div className="max-w-4xl mx-auto">
+                <h3 className="text-2xl font-bold text-dynamic-primary mb-4">
+                  Experiencia Comprobada en Argentina
+                </h3>
+                <p className="text-lg leading-relaxed text-dynamic-primary font-medium">
+                  Nuestros proyectos en Argentina abarcan desde <span className="text-blue-600 dark:text-blue-400 font-semibold">implementaciones ERP y sistemas de salud</span> hasta desarrollos 
+                  para el <span className="text-purple-600 dark:text-purple-400 font-semibold">sector público y transformaciones organizacionales completas</span>. Cada caso demuestra nuestra 
+                  capacidad para entregar <span className="text-green-600 dark:text-green-400 font-semibold">soluciones tecnológicas de alto impacto</span> que optimizan procesos críticos 
+                  en organizaciones líderes del país.
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         )}
@@ -178,11 +326,13 @@ export default function SuccessStoriesSection() {
                       {/* Header with logo and country */}
                       <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center">
-                          <img 
-                            src={case_item.logo} 
-                            alt={case_item.company}
-                            className="h-12 w-12 object-contain mr-4"
-                          />
+                          {case_item.logo && (
+                            <img 
+                              src={case_item.logo} 
+                              alt={case_item.company}
+                              className="h-12 w-12 object-contain mr-4"
+                            />
+                          )}
                           <div>
                             <h3 className="text-xl font-bold text-dynamic-primary">
                               {case_item.company}
@@ -197,10 +347,6 @@ export default function SuccessStoriesSection() {
                         </div>
                       </div>
 
-                      {/* Icon */}
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <case_item.icon className="h-6 w-6" />
-                      </div>
 
                       {/* Project Title */}
                       <h4 className="text-lg font-semibold mb-3 text-dynamic-primary leading-tight">
@@ -218,7 +364,6 @@ export default function SuccessStoriesSection() {
                           <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
                             Proyecto Internacional
                           </span>
-                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                         </div>
                       </div>
                     </CardContent>

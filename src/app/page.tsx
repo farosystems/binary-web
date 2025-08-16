@@ -13,6 +13,7 @@ import { textReveal, fadeInUp, staggerContainer, staggerItem, getViewport } from
 
 // Import all section components
 import HeroSection from "@/src/components/sections/HeroSection"
+import StatsSection from "@/src/components/sections/StatsSection"
 import ServicesSection from "@/src/components/sections/ServicesSection"
 import ProductsSection from "@/src/components/sections/ProductsSection"
 import TechnologiesSection from "@/src/components/sections/TechnologiesSection"
@@ -52,6 +53,9 @@ export default function BinaryLandingPage() {
 
       {/* Hero Section */}
       <HeroSection onSmoothScroll={handleSmoothScroll} />
+
+      {/* Stats Section */}
+      <StatsSection />
 
       {/* Services Section */}
       <ServicesSection />

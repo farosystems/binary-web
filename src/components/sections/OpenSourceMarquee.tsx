@@ -2,37 +2,44 @@
 
 import { cn } from "@/src/lib/utils"
 
-// Datos de tecnologías Open Source según requerimientos del PDF
+// Datos de tecnologías Open Source con SVGs actualizados
 const openSourceTechs = [
   { 
     name: "Java", 
-    logo: "/logos/java.png",
-    svg: null
+    logo: "/logos/java.svg",
+    logoLight: "/logos/java.svg",
+    logoDark: "/logos/java.svg"
   },
   { 
     name: "React", 
-    logo: "/logos/react.png",
-    svg: null
+    logo: "/logos/React_light.svg",
+    logoLight: "/logos/React_light.svg",
+    logoDark: "/logos/React_dark.svg"
   },
   { 
     name: "Go", 
-    logo: "/logos/go.png",
-    svg: null
+    logo: "/logos/Go_light.svg",
+    logoLight: "/logos/Go_light.svg",
+    logoDark: "/logos/Go_light.svg",
+    needsInvert: true
   },
   { 
     name: "Python", 
-    logo: "/logos/python.png",
-    svg: null
+    logo: "/logos/python.svg",
+    logoLight: "/logos/python.svg",
+    logoDark: "/logos/python.svg"
   },
   { 
     name: "MySQL", 
-    logo: "/logos/mysql.png",
-    svg: null
+    logo: "/logos/mysql.svg",
+    logoLight: "/logos/mysql.svg",
+    logoDark: "/logos/mysql.svg"
   },
   { 
     name: "MariaDB", 
-    logo: "/logos/mariadb.png",
-    svg: null
+    logo: "/logos/mariadb.svg",
+    logoLight: "/logos/mariadb.svg",
+    logoDark: "/logos/mariadb.svg"
   }
 ]
 
@@ -61,11 +68,18 @@ export default function OpenSourceMarquee() {
             {/* Primera iteración */}
             {openSourceTechs.map((tech, index) => (
               <div key={`first-${index}`} className="relative group flex items-center flex-shrink-0">
-                <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center transition-all duration-300">
+                <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 flex items-center justify-center transition-all duration-300">
+                  {/* Logo para light mode */}
                   <img 
-                    src={tech.logo} 
+                    src={tech.logoLight} 
                     alt={tech.name}
-                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300 dark:hidden"
+                  />
+                  {/* Logo para dark mode */}
+                  <img 
+                    src={tech.logoDark} 
+                    alt={tech.name}
+                    className={`w-full h-full object-contain filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300 hidden dark:block ${tech.needsInvert ? 'dark:invert' : ''}`}
                   />
                 </div>
                 {/* Tooltip */}
@@ -79,11 +93,18 @@ export default function OpenSourceMarquee() {
             {/* Segunda iteración para continuidad */}
             {openSourceTechs.map((tech, index) => (
               <div key={`second-${index}`} className="relative group flex items-center flex-shrink-0">
-                <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center transition-all duration-300">
+                <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 flex items-center justify-center transition-all duration-300">
+                  {/* Logo para light mode */}
                   <img 
-                    src={tech.logo} 
+                    src={tech.logoLight} 
                     alt={tech.name}
-                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300 dark:hidden"
+                  />
+                  {/* Logo para dark mode */}
+                  <img 
+                    src={tech.logoDark} 
+                    alt={tech.name}
+                    className={`w-full h-full object-contain filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300 hidden dark:block ${tech.needsInvert ? 'dark:invert' : ''}`}
                   />
                 </div>
                 {/* Tooltip */}
@@ -97,11 +118,18 @@ export default function OpenSourceMarquee() {
             {/* Tercera iteración para continuidad */}
             {openSourceTechs.map((tech, index) => (
               <div key={`third-${index}`} className="relative group flex items-center flex-shrink-0">
-                <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center transition-all duration-300">
+                <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 flex items-center justify-center transition-all duration-300">
+                  {/* Logo para light mode */}
                   <img 
-                    src={tech.logo} 
+                    src={tech.logoLight} 
                     alt={tech.name}
-                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300 dark:hidden"
+                  />
+                  {/* Logo para dark mode */}
+                  <img 
+                    src={tech.logoDark} 
+                    alt={tech.name}
+                    className={`w-full h-full object-contain filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300 hidden dark:block ${tech.needsInvert ? 'dark:invert' : ''}`}
                   />
                 </div>
                 {/* Tooltip */}

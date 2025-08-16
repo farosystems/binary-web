@@ -21,11 +21,18 @@ export default function HeroSection({ onSmoothScroll }: HeroSectionProps) {
         STYLES.layout.sectionFullScreenCenter,
         "relative overflow-hidden"
       )}
+      style={{
+        backgroundImage: 'url(/images/original-cityscape-background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
     >
 
       {/* Contenedor principal del hero */}
       <div className={cn(STYLES.layout.container, "text-center relative z-10")}>
-        <div className="max-w-4xl mx-auto py-8 sm:py-12 pt-12 sm:pt-16">
+        <div className="max-w-4xl mx-auto py-8 sm:py-12 pt-12 sm:pt-16 px-6 sm:px-8">
           
           {/* Badge animado */}
           <motion.div
@@ -118,8 +125,11 @@ export default function HeroSection({ onSmoothScroll }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* Overlay dinámico con gradiente sutil */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/40 via-transparent to-dynamic-primary/10" />
+      {/* Overlay dinámico adaptado al tema */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/20 via-black/10 to-black/15 dark:from-black/40 dark:via-black/25 dark:to-black/35" />
+      
+      {/* Overlay secundario para contraste óptimo */}
+      <div className="absolute inset-0 pointer-events-none bg-black/5 dark:bg-black/15" />
     </section>
   )
 }

@@ -1,10 +1,11 @@
 "use client"
 
-import { Leaf, FileText, Truck } from "lucide-react"
+import { useState } from "react"
+import { Leaf, FileText, Truck, Play, X } from "lucide-react"
 import { Card, CardContent } from "@/src/components/ui/card"
 import { cn } from "@/src/lib/utils"
 import { STYLES } from "@/src/lib/styles"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { textReveal, fadeInUp, staggerContainer, staggerItem, getViewport } from "@/src/lib/animations"
 
 const environmentalSolutions = [
@@ -39,6 +40,8 @@ const environmentalSolutions = [
 ]
 
 export default function EnvironmentalSection() {
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
+
   return (
     <section 
       id="medio-ambiente" 
@@ -55,23 +58,21 @@ export default function EnvironmentalSection() {
           whileInView={fadeInUp.animate}
           viewport={getViewport()}
         >
-          <motion.div
-            className="flex items-center justify-center mb-4"
-            {...fadeInUp}
-            whileInView={fadeInUp.animate}
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-dynamic-primary mb-8 relative text-center"
+            {...textReveal}
+            whileInView={textReveal.animate}
             viewport={getViewport()}
+            transition={{ ...textReveal.transition, delay: 0.2 }}
           >
-            <Leaf className="h-8 w-8 text-green-600 mr-3" />
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold text-dynamic-primary"
-              {...textReveal}
-              whileInView={textReveal.animate}
-              viewport={getViewport()}
-              transition={{ ...textReveal.transition, delay: 0.2 }}
-            >
-              Cuidado del Medio Ambiente
-            </motion.h2>
-          </motion.div>
+            Compromiso Ambiental
+            <motion.div 
+              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 128, opacity: 1 }}
+              transition={{ duration: 1, delay: 1.2 }}
+            />
+          </motion.h2>
           <motion.p 
             className="text-xl text-dynamic-secondary max-w-3xl mx-auto"
             {...fadeInUp}
@@ -83,127 +84,182 @@ export default function EnvironmentalSection() {
           </motion.p>
         </motion.div>
 
-        {/* Solutions Cards */}
-        <motion.div 
-          className={cn(STYLES.layout.gridServices, "lg:grid-cols-2 gap-8 mb-12")}
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={getViewport()}
-        >
-          {environmentalSolutions.map((solution, index) => (
-            <motion.div key={index} variants={staggerItem} className="h-full">
-              <Card className="group transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-lg bg-dynamic-secondary border-dynamic hover:shadow-xl h-full">
-                <CardContent className="p-8 h-full flex flex-col">
-                  {/* Icon */}
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    <solution.icon className="h-8 w-8" />
-                  </div>
-
-                  {/* Title */}
-                  <motion.h3 
-                    className="text-2xl font-bold mb-2 text-dynamic-primary"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={getViewport()}
-                    transition={{ delay: 0.2 }}
-                  >
-                    {solution.title}
-                  </motion.h3>
-
-                  {/* Subtitle */}
-                  <motion.h4
-                    className="text-lg font-semibold mb-4 text-green-600 dark:text-green-400"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={getViewport()}
-                    transition={{ delay: 0.3 }}
-                  >
-                    {solution.subtitle}
-                  </motion.h4>
-
-                  {/* Description */}
-                  <motion.p
-                    className="text-dynamic-secondary mb-6 leading-relaxed"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={getViewport()}
-                    transition={{ delay: 0.4 }}
-                  >
-                    {solution.description}
-                  </motion.p>
-
-                  {/* Benefits */}
-                  <motion.div
-                    className="mt-auto"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={getViewport()}
-                    transition={{ delay: 0.5 }}
-                  >
-                    <h5 className="font-semibold mb-3 text-dynamic-primary">Beneficios clave:</h5>
-                    <ul className="space-y-2">
-                      {solution.benefits.map((benefit, idx) => (
-                        <li key={idx} className="text-sm text-dynamic-secondary flex items-center">
-                          <span className="w-2 h-2 bg-green-500 rounded-full mr-3 flex-shrink-0"></span>
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Video Section */}
-        <motion.div
-          className="text-center"
-          {...fadeInUp}
-          whileInView={fadeInUp.animate}
-          viewport={getViewport()}
-          transition={{ ...fadeInUp.transition, delay: 0.6 }}
-        >
-          <motion.h3 
-            className="text-2xl font-bold mb-4 text-dynamic-primary"
-            {...textReveal}
-            whileInView={textReveal.animate}
-            viewport={getViewport()}
-            transition={{ ...textReveal.transition, delay: 0.7 }}
-          >
-            Resultado de Prueba - Transitabilidad de Caminos
-          </motion.h3>
+        {/* Soluciones Ambientales con Layout Lado a Lado */}
+        <div className="space-y-32 mb-16">
           
-          <motion.div
-            className="max-w-4xl mx-auto"
-            {...fadeInUp}
-            whileInView={fadeInUp.animate}
+          {/* Solución 1: B-Contracts - Contenido Izq, Visual Der */}
+          <motion.div 
+            className="grid lg:grid-cols-2 gap-12 items-center"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
             viewport={getViewport()}
-            transition={{ ...fadeInUp.transition, delay: 0.8 }}
           >
-            <div className="relative rounded-xl overflow-hidden shadow-2xl bg-dynamic-secondary border border-dynamic">
-              <video
-                controls
-                className="w-full h-full aspect-video"
-                preload="metadata"
-              >
-                <source src="/ba/Resultado BA (1).mp4" type="video/mp4" />
-                Tu navegador no soporta el elemento video.
-              </video>
-            </div>
-            
-            <motion.p 
-              className="mt-4 text-dynamic-secondary italic"
-              {...fadeInUp}
-              whileInView={fadeInUp.animate}
-              viewport={getViewport()}
-              transition={{ ...fadeInUp.transition, delay: 0.9 }}
+            {/* Contenido */}
+            <motion.div 
+              className="space-y-6 lg:w-full"
+              variants={staggerItem}
             >
-              Resultado de Prueba realizada en una calle (100 metros) de la localidad de 9 de Julio, Provincia de Buenos Aires
-            </motion.p>
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center shadow-lg">
+                  <FileText className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-dynamic-primary">B-Contracts</h3>
+                  <p className="text-blue-400 font-medium">Gestión Digital Paper-Less</p>
+                </div>
+              </div>
+              
+              <p className="text-dynamic-secondary text-lg leading-relaxed">
+                Gestión 100% digital de documentación organizacional, eliminando completamente el papel 
+                y contribuyendo al cuidado ambiental bajo el concepto "paper-less".
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {environmentalSolutions[0].benefits.slice(0, 4).map((benefit, idx) => (
+                  <div key={idx} className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
+                    <span className="text-dynamic-secondary text-sm">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Ilustración B-Contracts */}
+            <motion.div 
+              className="relative lg:w-full"
+              variants={staggerItem}
+            >
+              <div className="flex items-center justify-center">
+                <img 
+                  src="/illustrations/bcontracts.svg" 
+                  alt="Ilustración B-Contracts Paper-Less"
+                  className="w-full h-auto max-w-xs"
+                />
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
+
+          {/* Solución 2: Caminos - Visual Izq, Contenido Der */}
+          <motion.div 
+            className="grid lg:grid-cols-2 gap-12 items-center"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={getViewport()}
+          >
+            {/* Contenido */}
+            <motion.div 
+              className="space-y-6 lg:order-2 lg:w-full"
+              variants={staggerItem}
+            >
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center shadow-lg">
+                  <Truck className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-dynamic-primary">Transitabilidad de Caminos</h3>
+                  <p className="text-blue-400 font-medium">Solución Ecológica y Duradera</p>
+                </div>
+              </div>
+              
+              <p className="text-dynamic-secondary text-lg leading-relaxed">
+                Producto no contaminante que petrifica caminos de tierra, creando superficies duraderas 
+                de 8-10 años sin mantenimiento, eliminando polvo, barro y baches.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                {environmentalSolutions[1].benefits.slice(0, 4).map((benefit, idx) => (
+                  <div key={idx} className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
+                    <span className="text-dynamic-secondary text-sm">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Botón Ver Demo */}
+              <motion.button
+                onClick={() => setIsVideoModalOpen(true)}
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Play className="w-5 h-5" fill="currentColor" />
+                <span>Ver Demo</span>
+              </motion.button>
+            </motion.div>
+
+            {/* Ilustración Transitabilidad */}
+            <motion.div 
+              className="relative lg:order-1 lg:w-full"
+              variants={staggerItem}
+            >
+              <div className="flex items-center justify-center">
+                <img 
+                  src="/illustrations/transitabilidad.svg" 
+                  alt="Ilustración Transitabilidad de Caminos"
+                  className="w-full h-auto max-w-xs"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+
+        </div>
+
+        {/* Video Modal */}
+        <AnimatePresence>
+          {isVideoModalOpen && (
+            <motion.div
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsVideoModalOpen(false)}
+            >
+              <motion.div
+                className="relative bg-dynamic-secondary rounded-2xl overflow-hidden shadow-2xl max-w-4xl w-full"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                transition={{ type: "spring", damping: 20, stiffness: 300 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Modal Header */}
+                <div className="flex justify-between items-center p-4 border-b border-dynamic">
+                  <h4 className="text-lg font-bold text-dynamic-primary">
+                    Resultado de Prueba - Transitabilidad de Caminos
+                  </h4>
+                  <button
+                    onClick={() => setIsVideoModalOpen(false)}
+                    className="w-8 h-8 rounded-full bg-dynamic-muted hover:bg-red-500 flex items-center justify-center transition-colors duration-200 text-dynamic-secondary hover:text-white"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+                
+                {/* Video Container */}
+                <div className="aspect-video">
+                  <video
+                    controls
+                    autoPlay
+                    className="w-full h-full"
+                    preload="metadata"
+                  >
+                    <source src="/ba/Resultado BA (1).mp4" type="video/mp4" />
+                    Tu navegador no soporta el elemento video.
+                  </video>
+                </div>
+                
+                {/* Modal Footer */}
+                <div className="p-4 bg-dynamic-muted">
+                  <p className="text-dynamic-secondary text-sm text-center italic">
+                    9 de Julio, Provincia de Buenos Aires - Prueba en 100 metros de calle
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   )

@@ -189,43 +189,6 @@ export default function TeamSection() {
           </motion.div>
         </motion.div>
 
-      {/* Bottom Stats - MEJORADO */}
-      <motion.div 
-        className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto"
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={getViewport()}
-      >
-        <motion.div 
-          className="text-center"
-          variants={scaleIn}
-        >
-          <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">65+</div>
-          <div className="text-dynamic-secondary text-sm">Años de experiencia combinada</div>
-        </motion.div>
-        <motion.div 
-          className="text-center"
-          variants={scaleIn}
-        >
-          <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">50+</div>
-          <div className="text-dynamic-secondary text-sm">Proyectos exitosos</div>
-        </motion.div>
-        <motion.div 
-          className="text-center"
-          variants={scaleIn}
-        >
-          <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">3</div>
-          <div className="text-dynamic-secondary text-sm">Países de operación</div>
-        </motion.div>
-        <motion.div 
-          className="text-center"
-          variants={scaleIn}
-        >
-          <div className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-2">100%</div>
-          <div className="text-dynamic-secondary text-sm">Compromiso con la excelencia</div>
-        </motion.div>
-      </motion.div>
     </div>
   </section>
   )

@@ -19,9 +19,9 @@ export const ANIMATION_CONFIG = {
   
   // Easing curves for natural movement
   easing: {
-    smooth: [0.25, 0.46, 0.45, 0.94],
-    bounce: [0.68, -0.55, 0.265, 1.55],
-    swift: [0.4, 0, 0.2, 1]
+    smooth: [0.25, 0.46, 0.45, 0.94] as const,
+    bounce: [0.68, -0.55, 0.265, 1.55] as const,
+    swift: [0.4, 0, 0.2, 1] as const
   }
 }
 

@@ -61,127 +61,131 @@ export default function ServicesSection() {
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-dynamic-primary mb-4"
+            className="text-4xl md:text-5xl font-bold text-dynamic-primary mb-8 relative"
             {...textReveal}
             whileInView={textReveal.animate}
             viewport={{ once: true }}
             transition={{ ...textReveal.transition, delay: 0.2 }}
           >
-            Servicios Principales:
+            Nos especializamos en:
+            <motion.div 
+              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 128, opacity: 1 }}
+              transition={{ duration: 1, delay: 1 }}
+            />
           </motion.h2>
         </motion.div>
 
-        {/* Grid de servicios - MEJORADO */}
-        <motion.div 
-          className={STYLES.layout.gridServices}
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {services.map((service, index) => {
-            const IconComponent = service.icon
-            return (
-              <motion.div
-                key={index}
-                variants={cardReveal}
-                whileHover={{ 
-                  y: -8, 
-                  scale: 1.02,
-                  transition: { duration: 0.2 }
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Card className="bg-dynamic-muted border-dynamic hover:shadow-xl transition-all duration-300 border-0 shadow-lg h-full group">
-                  <CardContent className="p-6 h-full flex flex-col">
-                    
-                    {/* Header del servicio con icono - ANIMADO */}
-                    <div className="flex items-center mb-4">
-                      <motion.div 
-                        className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mr-4 shadow-lg"
-                        whileHover={{ 
-                          scale: 1.1, 
-                          rotate: 5,
-                          boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)"
-                        }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <IconComponent className="w-6 h-6 text-white" />
-                      </motion.div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold underline decoration-2 underline-offset-4 decoration-dynamic-soft text-dynamic-primary group-hover:decoration-blue-500 transition-colors duration-300">
-                          {service.title}
-                        </h3>
-                      </div>
-                    </div>
+        {/* Servicios con Layout Lado a Lado */}
+        <div className="space-y-32">
+          
+          {/* Servicio 1: Software Factory - Contenido Izq, Visual Der */}
+          <motion.div 
+            className="grid lg:grid-cols-2 gap-12 items-center"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {/* Contenido */}
+            <motion.div 
+              className="space-y-6 lg:w-full"
+              variants={cardReveal}
+            >
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center shadow-lg">
+                  <Code className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-dynamic-primary">Consultoría de Software</h3>
+                  <p className="text-blue-400 font-medium">Software Factory</p>
+                </div>
+              </div>
+              
+              <p className="text-dynamic-secondary text-lg leading-relaxed">
+                Desarrollamos APIs e integraciones que conectan aplicaciones existentes con nuevas soluciones, 
+                optimizando la gestión y eliminando procesos manuales.
+              </p>
+              
+              <div className="flex flex-wrap gap-2">
+                {services[0].process.map((step, idx) => (
+                  <span key={idx} className="bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full text-sm font-medium">
+                    {step}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
 
-                    {/* Subtítulo - ANIMADO */}
-                    <motion.h4 
-                      className="text-lg font-semibold mb-3 text-blue-600 dark:text-blue-400"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 }}
-                    >
-                      {service.subtitle}
-                    </motion.h4>
+            {/* Ilustración Consultoría */}
+            <motion.div 
+              className="relative lg:w-full"
+              variants={cardReveal}
+            >
+              <div className="flex items-center justify-center">
+                <img 
+                  src="/illustrations/consultoria.svg" 
+                  alt="Ilustración Consultoría de Software"
+                  className="w-full h-auto max-w-xs"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
 
-                    {/* Descripción del servicio - ANIMADO */}
-                    <motion.p 
-                      className="text-dynamic-secondary mb-4 leading-relaxed"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.4 }}
-                    >
-                      {service.description}
-                    </motion.p>
+          {/* Servicio 2: NFC/Industrias 4.0 - Visual Izq, Contenido Der */}
+          <motion.div 
+            className="grid lg:grid-cols-2 gap-12 items-center"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {/* Contenido */}
+            <motion.div 
+              className="space-y-6 lg:order-2 lg:w-full"
+              variants={cardReveal}
+            >
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <Factory className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-dynamic-primary">Industrias 4.0</h3>
+                  <p className="text-blue-400 font-medium">Sistemas NFC / Controles de Acceso</p>
+                </div>
+              </div>
+              
+              <p className="text-dynamic-secondary text-lg leading-relaxed">
+                Implementamos tecnología NFC para trazabilidad impecable y controles de acceso inteligentes, 
+                fortaleciendo la seguridad y optimizando operaciones industriales.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {services[1].benefits.slice(0, 4).map((benefit, idx) => (
+                  <div key={idx} className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
+                    <span className="text-dynamic-secondary text-sm">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
 
-                    {/* Proceso o Beneficios - ANIMADO */}
-                    {service.process && (
-                      <motion.div 
-                        className="mb-4"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5 }}
-                      >
-                        <h5 className="font-semibold mb-2 text-dynamic-primary">Proceso de Software Factory:</h5>
-                        <div className="flex flex-wrap gap-2">
-                          {service.process.map((step, idx) => (
-                            <span key={idx} className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full text-sm">
-                              {step}
-                            </span>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
+            {/* Ilustración Industrias 4.0 */}
+            <motion.div 
+              className="relative lg:order-1 lg:w-full"
+              variants={cardReveal}
+            >
+              <div className="flex items-center justify-center">
+                <img 
+                  src="/illustrations/industrias4.svg" 
+                  alt="Ilustración Industrias 4.0"
+                  className="w-full h-auto max-w-xs"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
 
-                    {service.benefits && (
-                      <motion.div 
-                        className="mb-4"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5 }}
-                      >
-                        <h5 className="font-semibold mb-2 text-dynamic-primary">Beneficios clave:</h5>
-                        <ul className="space-y-1">
-                          {service.benefits.map((benefit, idx) => (
-                            <li key={idx} className="text-sm text-dynamic-secondary flex items-center">
-                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 flex-shrink-0"></span>
-                              {benefit}
-                            </li>
-                          ))}
-                        </ul>
-                      </motion.div>
-                    )}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )
-          })}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

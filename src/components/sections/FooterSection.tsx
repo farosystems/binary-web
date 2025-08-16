@@ -210,7 +210,7 @@ export default function FooterSection() {
                   backgroundSize: "200% 200%"
                 }}
               >
-                Faro Sistemas
+                faro
               </motion.span>
               
               {/* Subtle external link icon */}
